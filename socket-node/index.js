@@ -16,7 +16,4 @@ io.on('connection', (socket) => {
         console.log('points_____:', pointsDraw)
         io.emit('pointsDrawToClient', pointsDraw)
     })
-    socket.on('sendClearCanvas', () => {
-        io.emit('clearCanvasToClient')
-    })
 })
