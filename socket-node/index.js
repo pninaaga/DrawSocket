@@ -8,12 +8,18 @@ const io = require("socket.io")(server)
 
 app.use(cors())
 
-let arr = []
+let arrPointsDraw = []
 io.on('connection', (socket) => {
     console.log("Connect socket ...");
 
     socket.on('sendPointsDraw', (pointsDraw, callback) => {
         console.log('points_____:', pointsDraw)
+        arrPointsDraw.push(pointsDraw)
         io.emit('pointsDrawToClient', pointsDraw)
     })
+    socket.on('sendConnect', () => {
+        console.log('arrPointsDrawwwwwwwwwwwwwwwwwww',arrPointsDraw)
+        io.emit('getStartDraw', arrPointsDraw.length>0?arrPointsDraw:'-1')
+    })
+
 })
